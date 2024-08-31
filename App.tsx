@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useState } from 'react';
 import { styles } from './styles';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
 
@@ -45,6 +46,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+    <StatusBar hidden={true} />
 
       <View style={styles.main}>
 
