@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { useState } from 'react';
 import { styles } from './styles';
 import { StatusBar } from 'expo-status-bar';
@@ -11,20 +11,25 @@ export default function App() {
   const [running, setRunning] = useState(false);
 
   const timer = () => {
-    setTimeout(() => {
-      let segundValue = segund;
-      segundValue++;
-      setSegund(segundValue);
-    }, 1000);
+    try {
+      setTimeout(() => {
+        let segundValue = segund;
+        segundValue++;
+        setSegund(segundValue);
+      }, 1000);
 
-    if (segund >= 60) {
+    } catch (error) {
+      console.log("ERROR: " + error);
+    }
+
+    if (segund === 60) {
       let minuteValue = minute;
       minuteValue++;
       setMinute(minuteValue);
       setSegund(0);
     }
 
-    if (minute >= 60) {
+    if (minute === 60) {
       let hourValue = hour;
       hourValue++;
       setHour(hourValue);
@@ -34,19 +39,16 @@ export default function App() {
   }
 
   const start = () => {
-    if (running) {
-      setRunning(false);
-    } else {
-      setRunning(true);
-    }
+    running ? setRunning(false) : setRunning(true);
   }
+
   if (running) {
     timer();
   }
 
   return (
     <View style={styles.container}>
-    <StatusBar hidden={true} />
+      <StatusBar hidden={true} />
 
       <View style={styles.main}>
 
